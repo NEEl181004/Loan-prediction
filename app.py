@@ -74,7 +74,7 @@ st.markdown("""
         }
         
         /* Input fields */
-        .stNumberInput input, .stSelectbox select {
+        .stNumberInput input {
             background: rgba(20, 25, 45, 0.95) !important;
             border: 2px solid rgba(0, 245, 255, 0.3) !important;
             border-radius: 12px !important;
@@ -83,7 +83,7 @@ st.markdown("""
             padding: 12px !important;
         }
         
-        .stNumberInput input:focus, .stSelectbox select:focus {
+        .stNumberInput input:focus {
             border: 2px solid #00f5ff !important;
             box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.2) !important;
             outline: none !important;
@@ -100,6 +100,69 @@ st.markdown("""
         input[type="number"] {
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
+        }
+        
+        /* SELECTBOX - Complete Fix */
+        .stSelectbox > div > div {
+            background: rgba(20, 25, 45, 0.95) !important;
+            border: 2px solid rgba(0, 245, 255, 0.3) !important;
+            border-radius: 12px !important;
+        }
+        
+        .stSelectbox > div > div:hover {
+            border-color: #00f5ff !important;
+        }
+        
+        /* Selected value in dropdown */
+        .stSelectbox > div > div > div {
+            color: #ffffff !important;
+        }
+        
+        /* Dropdown menu when opened */
+        [data-baseweb="popover"] {
+            background: #1a1f3a !important;
+            border: 2px solid #00f5ff !important;
+            border-radius: 12px !important;
+        }
+        
+        /* Dropdown options */
+        [data-baseweb="menu"] {
+            background: #1a1f3a !important;
+        }
+        
+        [role="option"] {
+            background: #1a1f3a !important;
+            color: #ffffff !important;
+            padding: 12px 16px !important;
+        }
+        
+        [role="option"]:hover {
+            background: #2a3f5a !important;
+            color: #00f5ff !important;
+        }
+        
+        /* Selected option highlighting */
+        [aria-selected="true"] {
+            background: #2a3f5a !important;
+            color: #00f5ff !important;
+        }
+        
+        /* Dropdown list container */
+        ul[role="listbox"] {
+            background: #1a1f3a !important;
+            border: 2px solid #00f5ff !important;
+            border-radius: 12px !important;
+        }
+        
+        ul[role="listbox"] li {
+            background: #1a1f3a !important;
+            color: #ffffff !important;
+            padding: 12px 16px !important;
+        }
+        
+        ul[role="listbox"] li:hover {
+            background: #2a3f5a !important;
+            color: #00f5ff !important;
         }
         
         /* Button */
@@ -132,6 +195,20 @@ st.markdown("""
             color: #ffffff !important;
         }
         
+        /* Sidebar spacing - prevent overlap */
+        section[data-testid="stSidebar"] > div {
+            padding: 1rem !important;
+        }
+        
+        section[data-testid="stSidebar"] .element-container {
+            margin-bottom: 0.5rem !important;
+        }
+        
+        section[data-testid="stSidebar"] hr {
+            margin: 1.5rem 0 !important;
+            border-color: rgba(0, 245, 255, 0.3) !important;
+        }
+        
         /* Metrics */
         [data-testid="stMetricValue"] {
             color: #00f5ff !important;
@@ -150,10 +227,163 @@ st.markdown("""
             color: #ffffff !important;
         }
         
+        /* Code blocks in expanders */
+        pre, code {
+            background: rgba(10, 14, 39, 0.8) !important;
+            color: #00f5ff !important;
+            padding: 8px !important;
+            border-radius: 6px !important;
+            border: 1px solid rgba(0, 245, 255, 0.2) !important;
+        }
+        
+        /* Dataframe styling - BRIGHT AND VISIBLE */
+        .dataframe {
+            background: rgba(15, 20, 40, 1) !important;
+            color: #ffffff !important;
+            border: 2px solid rgba(0, 245, 255, 0.3) !important;
+        }
+        
+        .dataframe th {
+            background: rgba(0, 120, 130, 0.9) !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            padding: 10px !important;
+            border: 1px solid rgba(0, 245, 255, 0.4) !important;
+        }
+        
+        .dataframe td {
+            color: #ffffff !important;
+            background: rgba(20, 25, 45, 0.9) !important;
+            border: 1px solid rgba(0, 245, 255, 0.2) !important;
+            padding: 8px !important;
+            font-weight: 500 !important;
+        }
+        
+        /* Dataframe index column */
+        .dataframe tbody tr th {
+            background: rgba(0, 120, 130, 0.7) !important;
+            color: #00f5ff !important;
+            font-weight: 700 !important;
+        }
+        
+        /* Dataframe container */
+        [data-testid="stDataFrame"] {
+            background: rgba(15, 20, 40, 1) !important;
+            padding: 10px !important;
+            border-radius: 8px !important;
+        }
+        
+        /* All table elements */
+        table {
+            color: #ffffff !important;
+        }
+        
+        table th, table td {
+            color: #ffffff !important;
+        }
+        
+        /* Text elements inside main content */
+        .stMarkdown {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+        
+        /* Fix "Expected Features" text visibility */
+        .main h3, .main h4, .main h5 {
+            color: #00f5ff !important;
+            margin-top: 1rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
         /* Expander */
         .streamlit-expanderHeader {
-            background: rgba(0, 245, 255, 0.1) !important;
+            background: rgba(26, 31, 58, 1) !important;
             color: #00f5ff !important;
+            border-radius: 8px !important;
+            margin-bottom: 10px !important;
+            border: 2px solid rgba(0, 245, 255, 0.5) !important;
+            padding: 14px 16px !important;
+            font-weight: 600 !important;
+            font-size: 14px !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+        
+        /* Expander arrow icon */
+        .streamlit-expanderHeader svg {
+            color: #00f5ff !important;
+            min-width: 20px !important;
+        }
+        
+        /* Expander content - SOLID background */
+        .streamlit-expanderContent {
+            background: rgba(15, 20, 40, 1) !important;
+            border: 2px solid rgba(0, 245, 255, 0.3) !important;
+            border-top: none !important;
+            border-radius: 0 0 8px 8px !important;
+            padding: 16px !important;
+            margin-top: -8px !important;
+            margin-bottom: 24px !important;
+            position: relative !important;
+            z-index: 0 !important;
+        }
+        
+        /* Fix expander spacing */
+        [data-testid="stExpander"] {
+            margin-bottom: 24px !important;
+            background: transparent !important;
+            position: relative !important;
+            clear: both !important;
+        }
+        
+        /* Expander text - ensure visibility */
+        .streamlit-expanderContent p,
+        .streamlit-expanderContent div,
+        .streamlit-expanderContent span,
+        .streamlit-expanderContent strong {
+            color: #ffffff !important;
+            line-height: 1.8 !important;
+        }
+        
+        /* Sidebar expander specific - MORE SPACING */
+        section[data-testid="stSidebar"] [data-testid="stExpander"] {
+            margin-bottom: 20px !important;
+            display: block !important;
+            clear: both !important;
+        }
+        
+        section[data-testid="stSidebar"] .streamlit-expanderHeader {
+            font-size: 13px !important;
+            padding: 12px 14px !important;
+            background: rgba(26, 31, 58, 1) !important;
+            margin-bottom: 0 !important;
+        }
+        
+        section[data-testid="stSidebar"] .streamlit-expanderContent {
+            font-size: 13px !important;
+            padding: 14px !important;
+            background: rgba(15, 20, 40, 1) !important;
+            margin-bottom: 20px !important;
+        }
+        
+        /* Fix text inside expanders */
+        section[data-testid="stSidebar"] .streamlit-expanderContent * {
+            color: #ffffff !important;
+        }
+        
+        /* Main page expander text visibility */
+        .main [data-testid="stExpander"] .streamlit-expanderContent {
+            background: rgba(15, 20, 40, 1) !important;
+        }
+        
+        .main [data-testid="stExpander"] p,
+        .main [data-testid="stExpander"] pre,
+        .main [data-testid="stExpander"] code {
+            color: #ffffff !important;
+        }
+        
+        /* Force spacing between sidebar elements */
+        section[data-testid="stSidebar"] .element-container {
+            margin-bottom: 1rem !important;
         }
         
         /* General text color */
@@ -163,8 +393,13 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Feature calculation functions (same as before)
+# Feature calculation functions - CORRECTED TO MATCH MODEL TRAINING
 def calculate_all_features(no_of_dep, grad_s, emp_s, annual_income, loan_amount, loan_dur, cibil, assets):
+    """
+    Calculate all features exactly as done during model training.
+    This must match the feature engineering in model.py lines 70-108.
+    """
+    # Base features (matching model.py)
     features = {
         'no_of_dependents': no_of_dep,
         'education': grad_s,
@@ -173,10 +408,37 @@ def calculate_all_features(no_of_dep, grad_s, emp_s, annual_income, loan_amount,
         'loan_amount': loan_amount,
         'loan_term': loan_dur,
         'cibil_score': cibil,
-        'Assets': assets
+        'total_assets': assets  # Changed from 'Assets' to 'total_assets'
     }
     
-    dti_ratio = (loan_amount / loan_dur) / (annual_income / 12) * 100
+    # Engineered features - EXACTLY as in model.py lines 79-92
+    
+    # 1. high_income (binary: above median income)
+    # Using a reasonable median estimate (can be adjusted)
+    median_income_estimate = 5000000  # Adjust based on your training data
+    features['high_income'] = 1 if annual_income > median_income_estimate else 0
+    
+    # 2. asset_level (categorical: 0, 1, 2)
+    if assets <= 1000000:
+        features['asset_level'] = 0
+    elif assets <= 5000000:
+        features['asset_level'] = 1
+    else:
+        features['asset_level'] = 2
+    
+    # 3. employment_risk (1 if self-employed, 0 otherwise)
+    features['employment_risk'] = emp_s
+    
+    # 4. family_size (categorical based on dependents)
+    if no_of_dep <= 1:
+        features['family_size'] = 0
+    elif no_of_dep <= 3:
+        features['family_size'] = 1
+    else:
+        features['family_size'] = 2
+    
+    # Calculate display metrics (for UI only, not used in prediction)
+    dti_ratio = (loan_amount / loan_dur) / (annual_income / 12) * 100 if loan_dur > 0 and annual_income > 0 else 0
     if pd.isna(dti_ratio) or np.isinf(dti_ratio):
         dti_ratio = 0
     
@@ -184,25 +446,10 @@ def calculate_all_features(no_of_dep, grad_s, emp_s, annual_income, loan_amount,
     if pd.isna(ltv_ratio) or np.isinf(ltv_ratio):
         ltv_ratio = 100
     
-    income_to_loan = annual_income / loan_amount if loan_amount > 0 else 0
-    if pd.isna(income_to_loan) or np.isinf(income_to_loan):
-        income_to_loan = 0
-    
-    loan_per_year = loan_amount / loan_dur if loan_dur > 0 else 0
-    
-    asset_to_income = assets / annual_income if annual_income > 0 else 0
-    if pd.isna(asset_to_income) or np.isinf(asset_to_income):
-        asset_to_income = 0
-    
-    features['DTI_Ratio'] = dti_ratio
-    features['LTV_Ratio'] = ltv_ratio
-    features['Income_to_Loan'] = income_to_loan
-    features['Loan_per_Year'] = loan_per_year
-    features['Asset_to_Income'] = asset_to_income
-    
     return features, dti_ratio, ltv_ratio
 
 def calculate_risk_score(cibil, dti, ltv, dependents):
+    """Calculate a simple risk score for display purposes"""
     cibil_score = ((cibil - 300) / 600) * 40
     dti_score = max(0, (50 - dti) / 50) * 25
     ltv_score = max(0, (80 - ltv) / 80) * 20
@@ -211,6 +458,7 @@ def calculate_risk_score(cibil, dti, ltv, dependents):
     return max(0, min(100, risk_score))
 
 def get_risk_category(risk_score):
+    """Categorize risk score"""
     if risk_score <= 20:
         return "🟢 Excellent"
     elif risk_score <= 35:
@@ -230,7 +478,7 @@ st.markdown("---")
 # Model info
 if model and feature_names:
     model_name = type(model).__name__
-    st.info(f"🤖 **Active Model:** {model_name} | **Features:** {len(feature_names)} | **Accuracy:** 100%")
+    st.info(f"🤖 **Active Model:** {model_name} | **Features:** {len(feature_names)}")
 
 # Sidebar
 with st.sidebar:
@@ -249,22 +497,77 @@ with st.sidebar:
     if model:
         st.metric("🤖 Model", type(model).__name__)
     
+    # Debug Information Section
+    if show_debug:
+        st.markdown("---")
+        st.markdown("### 🐛 Debug Info")
+        st.markdown("<br>", unsafe_allow_html=True)  # Extra spacing
+        
+        # Model Details
+        with st.expander("🤖 Model Details", expanded=False):
+            if model:
+                st.markdown(f"**Type:** `{type(model).__name__}`")
+                if hasattr(model, 'n_estimators'):
+                    st.markdown(f"**Estimators:** `{model.n_estimators}`")
+                if hasattr(model, 'max_depth'):
+                    st.markdown(f"**Max Depth:** `{model.max_depth}`")
+                if hasattr(model, 'learning_rate'):
+                    st.markdown(f"**Learning Rate:** `{model.learning_rate}`")
+        
+        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+        
+        # Feature Names
+        with st.expander("📋 Feature Names", expanded=False):
+            if feature_names:
+                st.markdown(f"**Total Features:** `{len(feature_names)}`")
+                st.markdown("")
+                for i, fname in enumerate(feature_names, 1):
+                    st.markdown(f"`{i}.` **{fname}**")
+            else:
+                st.warning("Feature names not loaded")
+        
+        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+        
+        # Scaler Info
+        with st.expander("⚖️ Scaler Info", expanded=False):
+            if scaler:
+                st.markdown(f"**Type:** `{type(scaler).__name__}`")
+                if hasattr(scaler, 'mean_'):
+                    st.markdown(f"**Features Scaled:** `{len(scaler.mean_)}`")
+            else:
+                st.warning("Scaler not loaded")
+    
     # Feature importance
     if show_feature_importance and hasattr(model, 'feature_importances_') and feature_names:
+        st.markdown("---")
         st.markdown("### 🎯 Top Features")
         importances = model.feature_importances_
         top_indices = np.argsort(importances)[-5:][::-1]
         for idx in top_indices:
-            st.text(f"{feature_names[idx][:15]}: {importances[idx]:.1%}")
+            st.text(f"{feature_names[idx][:20]}: {importances[idx]:.1%}")
     
     # History
     if st.session_state.prediction_history:
         st.markdown("---")
-        st.markdown("### 📜 History")
+        st.markdown("### 📜 Prediction History")
         approved = sum(1 for p in st.session_state.prediction_history if p == 1)
         total = len(st.session_state.prediction_history)
         st.metric("Approval Rate", f"{approved/total*100:.0f}%")
-        st.metric("Total", total)
+        st.metric("Total Predictions", total)
+        
+        if show_debug:
+            with st.expander("📊 History Details"):
+                st.write(f"Approved: {approved}")
+                st.write(f"Rejected: {total - approved}")
+                st.write(f"Last 5: {st.session_state.prediction_history[-5:]}")
+    
+    # System Info
+    if show_debug:
+        st.markdown("---")
+        with st.expander("💻 System Info"):
+            st.write(f"**Pandas:** {pd.__version__}")
+            st.write(f"**NumPy:** {np.__version__}")
+            st.write(f"**Streamlit:** {st.__version__}")
 
 # Main Content
 col1, col2 = st.columns([1, 1])
@@ -310,7 +613,7 @@ if Annual_Income > 0 and Loan_Amount > 0 and Loan_Dur > 0:
     metric_cols[1].metric("DTI Ratio", f"{dti_ratio:.1f}%")
     metric_cols[2].metric("LTV Ratio", f"{ltv_ratio:.1f}%")
     metric_cols[3].metric("Risk Score", f"{risk_score:.0f}")
-    metric_cols[4].metric("Coverage", f"{(Assets/Loan_Amount):.1f}x")
+    metric_cols[4].metric("Coverage", f"{(Assets/Loan_Amount):.1f}x" if Loan_Amount > 0 else "N/A")
 
 st.markdown("---")
 
@@ -323,12 +626,14 @@ if st.button("🚀 ANALYZE ELIGIBILITY"):
             grad_s = 1 if grad == 'Graduate' else 0
             emp_s = 1 if self_emp == 'Yes' else 0
             
+            # Calculate all features
             features, dti, ltv = calculate_all_features(
                 no_of_dep, grad_s, emp_s, Annual_Income, 
                 Loan_Amount, Loan_Dur, Cibil, Assets
             )
             
             if feature_names:
+                # Create DataFrame with features in the exact order expected by the model
                 pred_data = pd.DataFrame([[features[f] for f in feature_names]], columns=feature_names)
             else:
                 st.error("Feature names not found.")
@@ -336,12 +641,18 @@ if st.button("🚀 ANALYZE ELIGIBILITY"):
             
             # Debug
             if show_debug:
-                with st.expander("🔍 Debug Information"):
-                    st.write("**Encodings:**")
-                    st.write(f"Education: {grad} → {grad_s}")
-                    st.write(f"Self-Employed: {self_emp} → {emp_s}")
-                    st.write("**Features:**")
-                    st.dataframe(pred_data.T)
+                with st.expander("🔍 Debug Information", expanded=False):
+                    st.markdown("### Expected Features:")
+                    st.code('\n'.join(feature_names), language=None)
+                    
+                    st.markdown("")
+                    st.markdown("### Encodings:")
+                    st.markdown(f"- **Education:** `{grad}` → `{grad_s}`")
+                    st.markdown(f"- **Self-Employed:** `{self_emp}` → `{emp_s}`")
+                    
+                    st.markdown("")
+                    st.markdown("### Calculated Features:")
+                    st.dataframe(pred_data.T, width=True)
             
             # Predict
             try:
@@ -349,7 +660,9 @@ if st.button("🚀 ANALYZE ELIGIBILITY"):
                 prediction = model.predict(pred_data_scaled)
                 prediction_proba = model.predict_proba(pred_data_scaled) if hasattr(model, 'predict_proba') else None
             except Exception as e:
-                st.error(f"Prediction error: {e}")
+                st.error(f"❌ Prediction error: {e}")
+                if show_debug:
+                    st.exception(e)
                 st.stop()
             
             st.session_state.prediction_history.append(prediction[0])
@@ -394,12 +707,15 @@ if st.button("🚀 ANALYZE ELIGIBILITY"):
                 
                 if ltv > 70:
                     st.markdown(f"- 🏠 **Increase Assets:** Current LTV {ltv:.1f}%, target <70%")
+                
+                if no_of_dep > 3:
+                    st.markdown(f"- 👨‍👩‍👧 **High Dependents:** {no_of_dep} dependents may affect approval")
 
 # Footer
 st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: rgba(255,255,255,0.5); padding: 20px;'>
     🔒 Bank-Grade Security • 🤖 Advanced AI • 📊 Real-Time Analytics<br>
-    © 2026 AI Loan Genius - Powered by Gradient Boosting ML (100% Test Accuracy)
+    © 2026 AI Loan Genius - Powered by Gradient Boosting ML
 </div>
 """, unsafe_allow_html=True)
