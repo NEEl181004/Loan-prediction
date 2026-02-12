@@ -36,13 +36,37 @@ model, scaler, all_models, feature_names = load_models()
 if 'prediction_history' not in st.session_state:
     st.session_state.prediction_history = []
 
-# Simplified but Beautiful CSS - FIXED Z-INDEX ISSUES
+# Simplified but Beautiful CSS - FIXED DEPLOY BUTTON AND HEADER
 st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
         
         * {
             font-family: 'Inter', sans-serif !important;
+        }
+        button[data-testid="stAppToolbarDeployButton"] {
+            display: none !important;
+        }
+
+/* Also hide Share / Deploy text fallback */
+        [data-testid="stToolbar"] button:has(span:contains("Deploy")) {
+            display: none !important;
+        }
+            
+        /* HIDE DEPLOY BUTTON - SPECIFIC TARGETING */
+        [data-testid="stStatusWidget"] {
+            display: none !important;
+        }
+        
+        
+        
+        header[data-testid="stHeader"] {
+            background: transparent !important;
+        }
+        
+        /* Remove white space at top */
+        .main > div:first-child {
+            padding-top: 0 !important;
         }
         
         /* Background */
@@ -165,9 +189,9 @@ st.markdown("""
             color: #00f5ff !important;
         }
         
-        /* Button */
-        .stButton > button {
-            background: linear-gradient(135deg, #00f5ff 0%, #0090ff 100%) !important;
+        /* BUTTON - FIXED WITH SIMPLE SOLID APPROACH */
+        .stButton button {
+            background: #00f5ff !important;
             color: #000000 !important;
             padding: 18px 40px !important;
             border-radius: 50px !important;
@@ -175,15 +199,27 @@ st.markdown("""
             font-weight: 800 !important;
             border: none !important;
             width: 100% !important;
+            min-height: 60px !important;
             text-transform: uppercase !important;
             letter-spacing: 2px !important;
             box-shadow: 0 0 30px rgba(0, 245, 255, 0.5) !important;
             transition: all 0.3s ease !important;
         }
         
-        .stButton > button:hover {
+        .stButton button:hover {
             transform: scale(1.02) !important;
             box-shadow: 0 0 50px rgba(0, 245, 255, 0.8) !important;
+            background: #00ffff !important;
+        }
+        
+        /* Sidebar toggle button - CUSTOM STYLING */
+        button[kind="header"] {
+            background: transparent !important;
+        }
+        
+        button[kind="header"]:hover {
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.6) !important;
+            transform: scale(1.05) !important;
         }
         
         /* Sidebar */
@@ -215,10 +251,17 @@ st.markdown("""
             font-size: 24px !important;
         }
         
-        /* Hide Streamlit elements */
-        #MainMenu {visibility: hidden;}
+        
+        
         footer {visibility: hidden;}
-        header {visibility: hidden;}
+        
+        /* Hamburger button styling */
+        
+        
+        [data-testid="collapsedControl"]:hover {
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.7) !important;
+            transform: scale(1.1) !important;
+        }
         
         /* Info box */
         .stAlert {
@@ -501,26 +544,45 @@ to deliver instant, accurate loan eligibility predictions with personalized risk
 
 # Sidebar
 with st.sidebar:
-    st.header("⚙️ Configuration")
-    
-    # Model selection - Only Gradient Boosting
-    st.selectbox("🤖 Select Model", ['Gradient Boosting'], disabled=True)
-    
-    show_feature_importance = st.checkbox("📊 Feature Importance", value=False)
+    st.header("⚙️ Dashboard")
     
     st.markdown("---")
-    st.metric("🕐 Time", datetime.now().strftime("%H:%M"))
+    st.metric("🕐 Current Time", datetime.now().strftime("%H:%M"))
     if model:
-        st.metric("🤖 Model", "Gradient Boosting")
+        st.metric("🤖 AI Model", "Gradient Boosting")
     
-    # Feature importance
-    if show_feature_importance and hasattr(model, 'feature_importances_') and feature_names:
+    # Feature importance - SHOWN BY DEFAULT
+    if hasattr(model, 'feature_importances_') and feature_names:
         st.markdown("---")
-        st.markdown("### 🎯 Top Features")
+        st.markdown("### 🎯 Key Features")
+        st.markdown("<p style='font-size: 12px; color: rgba(255,255,255,0.7);'>Top factors influencing decisions:</p>", unsafe_allow_html=True)
+        
         importances = model.feature_importances_
         top_indices = np.argsort(importances)[-5:][::-1]
+        
         for idx in top_indices:
-            st.text(f"{feature_names[idx][:20]}: {importances[idx]:.1%}")
+            feature_name = feature_names[idx]
+            importance_pct = importances[idx] * 100
+            
+            # Create a visual bar
+            bar_width = int(importance_pct * 2)  # Scale for visibility
+            bar = "█" * max(1, bar_width // 10)
+            
+            st.markdown(f"""
+            <div style='margin-bottom: 12px;'>
+                <div style='color: #00f5ff; font-size: 11px; font-weight: 600; margin-bottom: 2px;'>
+                    {feature_name[:25]}
+                </div>
+                <div style='display: flex; align-items: center;'>
+                    <div style='color: rgba(0, 245, 255, 0.6); font-size: 14px; margin-right: 8px;'>
+                        {bar}
+                    </div>
+                    <div style='color: rgba(255, 255, 255, 0.8); font-size: 11px; font-weight: 600;'>
+                        {importance_pct:.1f}%
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
     
     # History
     if st.session_state.prediction_history:
@@ -530,6 +592,15 @@ with st.sidebar:
         total = len(st.session_state.prediction_history)
         st.metric("Approval Rate", f"{approved/total*100:.0f}%")
         st.metric("Total Predictions", total)
+        
+        # Visual representation
+        st.markdown(f"""
+        <div style='margin-top: 10px;'>
+            <div style='font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 5px;'>
+                ✅ Approved: {approved} | ❌ Rejected: {total - approved}
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 # Main Content
 col1, col2 = st.columns([1, 1])
@@ -593,8 +664,8 @@ if Annual_Income > 0 and Loan_Amount > 0 and Loan_Dur > 0:
 
 st.markdown("---")
 
-# Prediction Button
-if st.button("🚀 ANALYZE ELIGIBILITY"):
+# Prediction Button - FIXED WITH TYPE PRIMARY
+if st.button("🚀 ANALYZE ELIGIBILITY", type="primary", use_container_width=True):
     if not model or not scaler:
         st.error("❌ Model files not found!")
     else:
